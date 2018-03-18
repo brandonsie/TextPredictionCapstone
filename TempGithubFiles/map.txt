@@ -1,0 +1,16 @@
+ct1c <- coursera unigrams, no profanity
+t2b:t4b <- byu, fixed "n't", min 1k
+c1f:c4f <- coursera, 50% train
+
+c4s: min 100
+
+
+cs has counts 10x smaller than tb
+so merged 10x cs with 1x tb counts
+m merged
+
+m4t <- rbind(c4s,t4b)
+m4 <- sapply(unique(m4t$String), function(x) sum(m4t[grepl(x,m4t$String)]$Count))
+m4 <- data.frame(String = unique(m4t$String), Count = m4)
+m4 <- m4[order(-m4$Count),]
+write.csv(m4,"m4.csv")
